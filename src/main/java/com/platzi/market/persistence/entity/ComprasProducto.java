@@ -1,26 +1,24 @@
 package com.platzi.market.persistence.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "compras_productos")
 public class ComprasProducto {
-
     @EmbeddedId
     private ComprasProductoPK id;
 
     private Integer cantidad;
-
     private Double total;
-
-    private boolean estado;
+    private Boolean estado;
 
     @ManyToOne
-    @JoinColumn(name = "id_compra",insertable = false,updatable = false)
+    @MapsId("idCompra")
+    @JoinColumn(name = "id_compra", insertable = false, updatable = false)
     private Compra compra;
-    
+
     @ManyToOne
-    @JoinColumn(name = "id_producto", insertable = false,updatable = false)
+    @JoinColumn(name = "id_producto", insertable = false, updatable = false)
     private Producto producto;
 
     public ComprasProductoPK getId() {
@@ -47,11 +45,27 @@ public class ComprasProducto {
         this.total = total;
     }
 
-    public boolean getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 }
